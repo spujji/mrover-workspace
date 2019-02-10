@@ -94,6 +94,21 @@ vector<Point2f> findTennisBall(Mat &src, Mat & depth_src){
         circle( src, center[i], (int)radius[i], color, 2, 8, 0 );
     }
     #endif
-
+    
+    Mat img = croppedTennisBalls(src, center);
+    namedWindow("Display window", WINDOW_AUTOSIZE);
+    imshow("Display window", img);
     return center;
+}
+
+vector<Mat> croppedTennisBalls(mat &src, vector<Point2f>&center){
+
+    for(unsigned i = 0; i < center.size(); ++i){
+        Mat ROI(src, Rect(center[i][0]-250, center[i][1]-250), 500,500);
+        Mat croppedImg;
+        ROI.copyTo(croppedImg);
+        croppedTennisBalls.pushBack(croppedImg);
+    }
+    
+    return croppedTennisBalls;
 }
