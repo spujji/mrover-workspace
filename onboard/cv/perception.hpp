@@ -14,7 +14,7 @@
   #include <cstdlib>
 #endif
 
-#define ZED_SDK_PRESENT true
+#define ZED_SDK_PRESENT false
 // #define OFFLINE_TEST true
 #define PERCEPTION_DEBUG true
 
