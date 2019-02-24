@@ -31,14 +31,15 @@ void onMouse(int event, int x, int y, int flags, void* param)
 #endif
 
 vector<Mat> croppedTennisBalls(Mat &src, vector<Point2f> &center){
+    vector<Mat> cropped;
     
     for(unsigned i = 0; i < center.size(); ++i){
-        int startx = center[i][0] - 250;
-        int starty = center[i][1] - 250;
+        float startx = center[i] - 250;
+        float starty = center[i] - 250;
         
         Rect Rec (startx, starty, 500, 500);
-        rectangle(img, Rec, Scalar(255), 1, 8, 0);
-        Mat ROI = img(Rec);
+        rectangle(src, Rec, Scalar(255), 1, 8, 0);
+        Mat ROI = src(Rec);
         //Mat croppedImg;
         //ROI.copyTo(croppedImg);
         cropped.pushBack(ROI);
@@ -111,9 +112,10 @@ vector<Point2f> findTennisBall(Mat &src, Mat & depth_src){
     }
     #endif
     
-    Mat img = croppedTennisBalls(src, center);
+    vector<Mat> crop;
+    crop = croppedTennisBalls(src, center);
     namedWindow("Display window", WINDOW_AUTOSIZE);
-    imshow("Display window", img);
+    imshow("Display window", crop);
     
     return center;
 }
