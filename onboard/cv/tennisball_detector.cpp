@@ -30,23 +30,23 @@ void onMouse(int event, int x, int y, int flags, void* param)
 }
 #endif
 
-vector<Mat> croppedTennisBalls(Mat &src, vector<Point2f> &center){
-    vector<Mat> cropped;
-    
-    for(unsigned i = 0; i < center.size(); ++i){
-        float startx = center[i] - 250;
-        float starty = center[i] - 250;
-        
-        Rect Rec (startx, starty, 500, 500);
-        rectangle(src, Rec, Scalar(255), 1, 8, 0);
-        Mat ROI = src(Rec);
-        //Mat croppedImg;
-        //ROI.copyTo(croppedImg);
-        cropped.pushBack(ROI);
-    }
-    
-    return cropped;
-}
+//vector<Mat> croppedTennisBalls(Mat &src, vector<Point2f> &center){
+//    vector<Mat> cropped;
+//
+//    for(unsigned i = 0; i < center.size(); ++i){
+//        float startx = center[i] - 250;
+//        float starty = center[i] - 250;
+//
+//        Rect Rec (startx, starty, 500, 500);
+//        rectangle(src, Rec, Scalar(255), 1, 8, 0);
+//        Mat ROI = src(Rec);
+//        //Mat croppedImg;
+//        //ROI.copyTo(croppedImg);
+//        cropped.pushBack(ROI);
+//    }
+//
+//    return cropped;
+//}
 
 
 Mat greenFilter(const Mat& src){
@@ -112,10 +112,14 @@ vector<Point2f> findTennisBall(Mat &src, Mat & depth_src){
     }
     #endif
     
-    vector<Mat> crop;
-    crop = croppedTennisBalls(src, center);
-    namedWindow("Display window", WINDOW_AUTOSIZE);
-    imshow("Display window", crop);
+//    vector<Mat> crop;
+//    crop = croppedTennisBalls(src, center);
+//    namedWindow("Display window", WINDOW_AUTOSIZE);
+//    imshow("Display window", crop);
+    
+    Mat B(src, Rect(10,10,100,100));
+    cv2.imshow("cropped", B);
+    cv2.waitKey(0);
     
     return center;
 }
